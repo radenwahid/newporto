@@ -116,26 +116,26 @@ const Header = () => {
                     </Link>
                   ))}
                 </ul>
-                <a href={resume} target="_blank">
-                  <motion.button
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.5 }}
-                    className="px-4 py-2 rounded-md font-medium text-designColor text-[13px] tracking-wider uppercase border border-designColor hover:bg-hoverColor duration-300"
-                  >
-                    Resume
-                  </motion.button>
-                </a>
+                 <motion.a
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            href="https://drive.google.com/file/d/12bQKXS6GN9mIpOFndTjEVtK6BtBJO8K5/view?usp=sharing"
+            target="blank"
+            className="px-4 py-2 rounded-md font-medium text-designColor text-[13px] tracking-wider uppercase border border-designColor hover:bg-hoverColor duration-200"
+          >
+            Resume
+          </motion.a>
                 <SocialLInks className="flex-row items-center gap-5" />
                 <motion.a
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 1.2, ease: "easeIn" }}
                   className="text-sm w-72 tracking-widest text-designColor text-center mt-4"
-                  href="mailto:noor.jsdivs@gmail.com"
+                  href="mailto:radenwahiddd29@gmail.com"
                 >
                   <p className="text-darkText hover:text-designColor hover:underline underline-offset-4 duration-200">
-                    reactbd@proton.me
+                    radenwahiddd29@gmail.com
                   </p>
                 </motion.a>
               </div>
