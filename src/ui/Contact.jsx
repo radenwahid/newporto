@@ -15,11 +15,10 @@ const Contact = () => {
       If you have other questions or project collaboration, click below
       </p>
       <div className="flex space-x-4">
-  <a href="mailto:radenwahiddd29@gmail.com">
-    <p className="w-40 h-14 border border-designColor font-semibold text-sm text-designColor tracking-wider rounded-md hover:bg-hoverColor duration-300 flex items-center justify-center">
-      Say Hello 
-    </p>
-  </a>
+  <a href="mailto:radenwahiddd29@gmail.com" className="w-40 h-14 border border-designColor font-semibold text-sm text-designColor tracking-wider rounded-md hover:bg-hoverColor duration-300 flex items-center justify-center">
+  Say Hello
+</a>
+
   <a href="https://wa.me/6288218773247?text=Hello%2C%20I%20would%20like%20to%20collaborate" target="_blank" rel="noopener noreferrer">
   <p className="w-40 h-14 border border-designColor font-semibold text-sm text-designColor tracking-wider rounded-md hover:bg-hoverColor duration-300 flex items-center justify-center">
     WhatsApp Me
