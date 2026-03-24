@@ -10,6 +10,11 @@ export default {
         darkText: "#8892b0",
         hoverColor: "rgba(100,255,218,0.1)",
         textBg: "#112240",
+        // Light mode colors
+        lightPrimary: "#f8fafc",
+        lightBg: "#ffffff",
+        lightAccent: "#0ea5e9", // Sky blue for light mode
+        lightHover: "rgba(14,165,233,0.1)",
       },
       fontFamily: {
         bodyFont: ["Montserrat", "sans-serif"],

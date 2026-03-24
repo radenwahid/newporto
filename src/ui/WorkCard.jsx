@@ -1,5 +1,6 @@
 import { TiArrowForward } from "react-icons/ti";
 import { motion } from "framer-motion";
+
 const WorkCard = ({
   jobTitle,
   jobTag,
@@ -7,6 +8,7 @@ const WorkCard = ({
   detailsOne,
   detailsTwo,
   detailsThree,
+  isDarkMode = true,
 }) => {
   return (
     <motion.div
@@ -14,26 +16,26 @@ const WorkCard = ({
       animate={{ opacity: 1 }}
       transition={{ delay: 0.1 }}
     >
-      <h3 className="text-xl font-medium flex gap-1">
+      <h3 className={`text-xl font-medium flex gap-1 ${isDarkMode ? 'text-lightText' : 'text-gray-800'}`}>
         {jobTitle}{" "}
-        <span className="text-designColor tracking-wide">{jobTag}</span>
+        <span className="tracking-wide text-designColor">{jobTag}</span>
       </h3>
-      <p className="text-sm mt-1 font-medium text-darkText">{date}</p>
-      <ul className="mt-6 flex flex-col gap-3">
-        <li className="flex gap-2 text-darkText">
-          <span className="text-designColor mt-1">
+      <p className={`text-sm mt-1 font-medium ${isDarkMode ? 'text-darkText' : 'text-gray-600'}`}>{date}</p>
+      <ul className="flex flex-col gap-3 mt-6">
+        <li className={`flex gap-2 ${isDarkMode ? 'text-darkText' : 'text-gray-600'}`}>
+          <span className="mt-1 text-designColor">
             <TiArrowForward size={20} />
           </span>
           {detailsTwo}
         </li>
-        <li className="flex gap-2 text-darkText">
-          <span className="text-designColor mt-1">
+        <li className={`flex gap-2 ${isDarkMode ? 'text-darkText' : 'text-gray-600'}`}>
+          <span className="mt-1 text-designColor">
             <TiArrowForward size={20} />
           </span>
           {detailsThree}
         </li>
-        <li className="flex gap-2 text-darkText">
-          <span className="text-designColor mt-1">
+        <li className={`flex gap-2 ${isDarkMode ? 'text-darkText' : 'text-gray-600'}`}>
+          <span className="mt-1 text-designColor">
             <TiArrowForward size={20} />
           </span>
           {detailsOne}

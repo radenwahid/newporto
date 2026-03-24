@@ -1,5 +1,5 @@
+import { useState, useEffect } from "react";
 import About from "./ui/About";
-import Archive from "./ui/Archive";
 import Banner from "./ui/Banner";
 import Contact from "./ui/Contact";
 import Experience from "./ui/Experience";
@@ -11,33 +11,52 @@ import ScrollBtn from "./ui/ScrollBtn";
 import { motion } from "framer-motion";
 
 function App() {
-  return (
-    <main className="font-bodyFont min-h-screen bg-primaryColor text-lightText">
-      <Header />
+  const [isDarkMode, setIsDarkMode] = useState(true);
 
-      <Banner />
-      <About />
-      <Experience />
-      <Project />
-      <Archive />
-      <Contact />
+  useEffect(() => {
+    // Check for saved theme preference or use system preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      setIsDarkMode(savedTheme === 'dark');
+    }
+  }, []);
+
+  useEffect(() => {
+    // Save theme preference and update document class
+    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [isDarkMode]);
+
+  return (
+    <main className={`font-bodyFont min-h-screen ${isDarkMode ? 'bg-primaryColor text-lightText' : 'bg-gray-50 text-gray-800'}`}>
+      <Header isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
+
+      <Banner isDarkMode={isDarkMode} />
+      <About isDarkMode={isDarkMode} />
+      <Experience isDarkMode={isDarkMode} />
+      <Project isDarkMode={isDarkMode} />
+      <Contact isDarkMode={isDarkMode} />
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
-        className="hidden lg:inline-flex w-32 h-full fixed left-0 bottom-0"
+        className="fixed bottom-0 left-0 hidden w-32 h-full lg:inline-flex"
       >
-        <LeftSide />
+        <LeftSide isDarkMode={isDarkMode} />
       </motion.div>
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
-        className="hidden lg:inline-flex w-32 h-full fixed right-0 bottom-0"
+        className="fixed bottom-0 right-0 hidden w-32 h-full lg:inline-flex"
       >
-        <RightSide />
+        <RightSide isDarkMode={isDarkMode} />
       </motion.div>
-      <ScrollBtn />
+      <ScrollBtn isDarkMode={isDarkMode} />
     </main>
   );
 }

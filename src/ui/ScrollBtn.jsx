@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { MdArrowUpward } from "react-icons/md";
+import { motion, AnimatePresence } from "framer-motion";
 
-const ScrollBtn = () => {
+const ScrollBtn = ({ isDarkMode = true }) => {
   const [scrollPercentage, setScrollPercentage] = useState(0);
-  useEffect(() => {
-    const scrollBtn = document.querySelector(".scrollBtn");
+  const [isVisible, setIsVisible] = useState(false);
 
+  useEffect(() => {
     const calculateScrollPercentage = () => {
       const scrollTop =
         document.documentElement.scrollTop || document.body.scrollTop;
@@ -19,23 +20,16 @@ const ScrollBtn = () => {
     const scrollFunction = () => {
       calculateScrollPercentage();
       if (window.scrollY > 300) {
-        scrollBtn.style.display = "block";
+        setIsVisible(true);
       } else {
-        scrollBtn.style.display = "none";
+        setIsVisible(false);
       }
     };
 
-    const scrollToTop = () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    };
-
     window.addEventListener("scroll", scrollFunction);
-    scrollBtn.addEventListener("click", scrollToTop);
-
-    // Cleanup the event listeners on component unmount
+    
     return () => {
       window.removeEventListener("scroll", scrollFunction);
-      scrollBtn.removeEventListener("click", scrollToTop);
     };
   }, []);
 
@@ -44,30 +38,48 @@ const ScrollBtn = () => {
   const strokeDashoffset =
     circumference - (scrollPercentage / 100) * circumference;
 
+  // Glow color based on theme
+  const glowColor = isDarkMode ? "#64ffda" : "#0ea5e9";
+
   return (
-    <div
-      className="fixed bottom-10 right-20 z-50 bg-darkText/40 text-lightText/80 p-3 rounded-full cursor-pointer hover:bg-black hover:text-designColor transition duration-300 scrollBtn"
-      style={{ width: 50, height: 50 }}
-    >
-      <span className="absolute inline-block left-0 top-0">
-        <svg width="55" height="55" viewBox="0 0 55 55">
-          <circle
-            cx="25"
-            cy="25"
-            r={radius}
-            stroke="#64ffda"
-            strokeWidth="4"
-            fill="none"
-            strokeDasharray={circumference}
-            strokeDashoffset={strokeDashoffset}
+    <AnimatePresence>
+      {isVisible && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0 }}
+          transition={{ duration: 0.3 }}
+          className={`fixed bottom-6 right-4 md:right-10 lg:right-20 z-50 ${
+            isDarkMode 
+              ? 'bg-darkText/40 text-lightText/80' 
+              : 'bg-gray-300 text-gray-600'
+          } p-2.5 md:p-3 rounded-full cursor-pointer hover:bg-black hover:text-designColor transition duration-300`}
+          style={{ width: 44, height: 44 }}
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <span className="absolute top-0 left-0 inline-block">
+            <svg width="44" height="44" viewBox="0 0 44 44">
+              <circle
+                cx="22"
+                cy="22"
+                r={radius}
+                stroke={glowColor}
+                strokeWidth="3"
+                fill="none"
+                strokeDasharray={circumference}
+                strokeDashoffset={strokeDashoffset}
+              />
+            </svg>
+          </span>
+          <MdArrowUpward
+            size={20}
+            className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
           />
-        </svg>
-      </span>
-      <MdArrowUpward
-        size={24}
-        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-      />
-    </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 

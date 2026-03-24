@@ -1,12 +1,20 @@
-const SectionTitle = ({ title, titleNo }) => {
+import { motion } from "framer-motion";
+
+const SectionTitle = ({ title, titleNo, isDarkMode = true }) => {
   return (
-    <h2 className="text-2xl font-semibold hidden md:inline-flex items-center">
-      <span className="text-base md:text-lg text-designColor mr-2">
-        
+    <motion.h2 
+      initial={{ opacity: 0, x: -20 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+      className="items-center hidden text-2xl font-semibold md:inline-flex"
+    >
+      <span className="mr-2 text-base md:text-lg text-designColor">
+        {titleNo}
       </span>{" "}
-      {title}
-      <span className="md:w-60 lg:w-72 h-[.5px] bg-gray-700 ml-6"></span>
-    </h2>
+      <span className={isDarkMode ? 'text-lightText' : 'text-gray-800'}>{title}</span>
+      <span className={`md:w-60 lg:w-72 h-[.5px] ml-6 ${isDarkMode ? 'bg-gray-700' : 'bg-gray-300'}`}></span>
+    </motion.h2>
   );
 };
 

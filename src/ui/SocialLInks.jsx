@@ -35,7 +35,8 @@ const socialAccounts = [
     delay: 1,
   },
 ];
-const SocialLInks = ({ className }) => {
+
+const SocialLInks = ({ className, isDarkMode = true }) => {
   return (
     <div className={twMerge("flex flex-col gap-y-5", className)}>
       {socialAccounts?.map((item) => (
@@ -46,8 +47,12 @@ const SocialLInks = ({ className }) => {
           transition={{ delay: item?.delay, ease: "easeIn" }}
           href={item?.link}
           target="blank"
+          whileHover={{ scale: 1.1, rotate: 5 }}
+          whileTap={{ scale: 0.95 }}
         >
-          <span className="w-10 h-10 text-xl bg-textBg border-[1px] inline-flex items-center justify-center rounded-full border-zinc-500 hover:border-designColor text-lightText hover:text-designColor duration-200 hover:bg-black">
+          <span className={`w-10 h-10 text-xl bg-textBg border-[1px] inline-flex items-center justify-center rounded-full border-zinc-500 hover:border-designColor hover:text-designColor duration-200 hover:bg-black ${
+            isDarkMode ? 'text-lightText' : 'text-gray-700 bg-gray-100'
+          }`}>
             {item?.icon}
           </span>
         </motion.a>
