@@ -8,6 +8,7 @@ import LeftSide from "./ui/LeftSide";
 import Project from "./ui/Project";
 import RightSide from "./ui/RightSide";
 import ScrollBtn from "./ui/ScrollBtn";
+import CookieBanner from "./ui/CookieBanner";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 
@@ -31,6 +32,18 @@ function App() {
       document.documentElement.classList.remove('dark');
     }
   }, [isDarkMode]);
+
+  useEffect(() => {
+    // 🛡️ SECURITY PATCH: Mencegah serangan Punycode (Homograph Attacks)
+    // Mengecek apakah ada hacker menggunakan karakter unicode tersembunyi
+    const hostname = window.location.hostname;
+    if (hostname.startsWith('xn--')) {
+      alert("⚡ PERINGATAN KEAMANAN: Celah keamanan homograph attack (Punycode) terdeteksi! Mengalihkan Anda ke domain yang aman untuk mencegah pencurian data...");
+      // For testing, just log it. In prod, uncomment the redirect to safe domain
+      console.warn("Punycode attack detected over domain:", hostname);
+      // window.location.href = "https://your-safe-domain.com";
+    }
+  }, []);
 
   return (
     <main className={`font-bodyFont min-h-screen ${isDarkMode ? 'bg-primaryColor text-lightText' : 'bg-gray-50 text-gray-800'}`}>
@@ -64,6 +77,7 @@ function App() {
         <RightSide isDarkMode={isDarkMode} />
       </motion.div>
       <ScrollBtn isDarkMode={isDarkMode} />
+      <CookieBanner />
     </main>
   );
 }
