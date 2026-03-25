@@ -20,14 +20,25 @@ const CookieBanner = () => {
 
   const saveToExcel = async (data) => {
     try {
-      // Trying to hit our PHP backend API to save the data into a CSV/Excel file
-      await fetch("/api/save_consent.php", {
+      // Menggunakan Web3Forms untuk produksi di Vercel
+      // Dapatkan Access Key gratis dari https://web3forms.com/
+      const payload = {
+        access_key: "EN4DWtmj1gGrmUii6LYMgrw3H9K9XJZGo6du64L8H2Mb", 
+        subject: "Persetujuan Cookie Baru (Siap Export CSV)",
+        from_name: "Sistem Cookie Portofolio",
+        ...data
+      };
+
+      await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        headers: { 
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify(payload),
       });
     } catch (error) {
-      console.error("Failed to save consent data to Excel/CSV:", error);
+      console.error("Gagal menyimpan persetujuan:", error);
     }
   };
 
