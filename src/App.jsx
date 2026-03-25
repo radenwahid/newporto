@@ -9,6 +9,7 @@ import Project from "./ui/Project";
 import RightSide from "./ui/RightSide";
 import ScrollBtn from "./ui/ScrollBtn";
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(true);
@@ -33,6 +34,12 @@ function App() {
 
   return (
     <main className={`font-bodyFont min-h-screen ${isDarkMode ? 'bg-primaryColor text-lightText' : 'bg-gray-50 text-gray-800'}`}>
+      <Helmet>
+        <title>Raden Wahid | Fullstack & Backend Developer</title>
+        <meta name="title" content="Raden Wahid | Fullstack & Backend Developer" />
+        <meta name="description" content="Portfolio of Raden Wahid, a Fullstack and Backend Developer with over 3 years of experience building scalable, secure, and user-focused web applications." />
+        <meta name="keywords" content="Raden Wahid, Raden, Wahid, Portfolio, Backend Developer, Fullstack Developer, Web Developer, Web Developer Indonesia, Software Engineer, Laravel Developer, React Developer, radenwahid" />
+      </Helmet>
       <Header isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
 
       <Banner isDarkMode={isDarkMode} />
